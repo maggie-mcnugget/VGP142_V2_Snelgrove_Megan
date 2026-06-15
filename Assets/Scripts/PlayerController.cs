@@ -31,6 +31,17 @@ public class PlayerController : MonoBehaviour
     public float attackCooldown = 0.5f;
     private float attackTimer = 0f;
 
+    private int equippedWeapon = 0;
+
+    public bool hasGun = false;
+    public bool hasSword = false;
+
+    public GameObject gunModel;
+    public GameObject swordModel;
+
+    public GameObject bulletPrefab;
+    public Transform firePoint;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
@@ -40,10 +51,14 @@ public class PlayerController : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        gunModel.SetActive(false);
+        swordModel.SetActive(false);
     }
 
     void Update()
     {
+
         attackTimer -= Time.deltaTime;
 
         Vector3 forward = transform.TransformDirection(Vector3.forward);
@@ -101,12 +116,62 @@ public class PlayerController : MonoBehaviour
             playerCamera.transform.localRotation = Quaternion.Euler(rotationX, 0, 0);
             transform.rotation *= Quaternion.Euler(0, Input.GetAxis("Mouse X") * lookSpeed, 0);
         }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2) && hasSword)
+        {
+            equippedWeapon = 2;
+
+            swordModel.SetActive(true);
+            gunModel.SetActive(false);
+
+            animator.SetInteger("weaponType", 2);
+            Debug.Log("Sword Selected");
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha1) && hasGun)
+        {
+            equippedWeapon = 1;
+
+            gunModel.SetActive(true);
+            swordModel.SetActive(false);
+
+            animator.SetInteger("weaponType", 1);
+            Debug.Log("Gun Selected");
+        }
     }
+
     private void Attack()
     {
-        Debug.Log("Attack triggered");
-        animator.SetTrigger("Attack");
-        DealAttackDamage();
+        switch (equippedWeapon)
+        {
+            case 1: // Gun
+                animator.SetTrigger("GunAttack");
+                FireProjectile();
+                Debug.Log("Gun Attack");
+                break;
+
+            case 2: // Sword
+                animator.SetTrigger("SwordAttack");
+                DealAttackDamage();
+                Debug.Log("Sword Attack");
+                break;
+
+            default:
+                animator.SetTrigger("Attack");
+                DealAttackDamage();
+                break;
+        }
+    }
+
+    private void FireProjectile()
+    {
+        Debug.Log("Spawning bullet");
+
+        Instantiate(
+            bulletPrefab,
+            firePoint.position,
+            firePoint.rotation
+        );
     }
 
     public void DealAttackDamage()

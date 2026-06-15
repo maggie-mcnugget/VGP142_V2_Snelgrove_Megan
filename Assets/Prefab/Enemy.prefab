@@ -342,6 +342,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89888c0eaf153354ca42c5eb3803ea01, type: 3}
       insertIndex: -1
       addedObject: {fileID: 7072136693460186206}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 89888c0eaf153354ca42c5eb3803ea01, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 5114896748367050622}
   m_SourcePrefab: {fileID: 100100000, guid: 89888c0eaf153354ca42c5eb3803ea01, type: 3}
 --- !u!1 &3869382009347811405 stripped
 GameObject:
@@ -360,9 +363,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f679beeeace51ff44bbacab5fa2936f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EnemyController
-  player: {fileID: 0}
+  player: {fileID: 7484938988041501165, guid: 9d78eb43b85b8614291fb5edd2988f9f, type: 3}
   animator: {fileID: 0}
-  playerHealth: {fileID: 0}
+  playerHealth: {fileID: 5656870427895498942, guid: 9d78eb43b85b8614291fb5edd2988f9f, type: 3}
   detectionRadius: 10
   attackRange: 2
   patrolRadius: 20
@@ -370,6 +373,8 @@ MonoBehaviour:
   patrolIdelTime: 3
   rotationSpeed: 5
   attackDuration: 1
+  powerupPrefab: {fileID: 8507199518291463243, guid: 438485dc27f30e9439c6e5a01a4ea884, type: 3}
+  dropHeight: 1
   health: 100
 --- !u!195 &7072136693460186206
 NavMeshAgent:
@@ -393,3 +398,26 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!136 &5114896748367050622
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3869382009347811405}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.18561172
+  m_Height: 1.7561939
+  m_Direction: 1
+  m_Center: {x: -0.024082184, y: 0.9351202, z: -0.008232117}
